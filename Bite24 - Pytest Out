@@ -1,0 +1,44 @@
+============================= test session starts ==============================
+platform linux -- Python 3.8.5, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /tmp
+plugins: asyncio-0.12.0
+collected 4 items
+
+../../tmp/test_challenge.py ..FF
+
+=================================== FAILURES ===================================
+__________________ test_super_and_abst_method_implementation ___________________
+
+    def test_super_and_abst_method_implementation():
+        merged_prs = [41, 42, 44]
+        try:
+            blog = BlogChallenge(1, 'Wordvalues', merged_prs)
+        except TypeError:
+            pytest.fail("Unexpected TypeError, missing methods/properties?")
+    
+>       assert blog.verify(random.choice(merged_prs))
+E       assert False
+E        +  where False = <bound method BlogChallenge.verify of <challenge.BlogChallenge object at 0x7ff13c6a58b0>>(44)
+E        +    where <bound method BlogChallenge.verify of <challenge.BlogChallenge object at 0x7ff13c6a58b0>> = <challenge.BlogChallenge object at 0x7ff13c6a58b0>.verify
+E        +    and   44 = <bound method Random.choice of <random.Random object at 0x153ac70>>([41, 42, 44])
+E        +      where <bound method Random.choice of <random.Random object at 0x153ac70>> = random.choice
+
+/tmp/test_challenge.py:35: AssertionError
+_________________ test_super_and_abst_property_implementation __________________
+
+    def test_super_and_abst_property_implementation():
+        try:
+            bite = BiteChallenge(24, 'ABC and class inheritance', 'my result')
+        except TypeError:
+            pytest.fail("Unexpected TypeError, missing methods/properties?")
+    
+>       assert bite.verify('my result')
+E       AssertionError: assert False
+E        +  where False = <bound method BiteChallenge.verify of <challenge.BiteChallenge object at 0x7ff13c663430>>('my result')
+E        +    where <bound method BiteChallenge.verify of <challenge.BiteChallenge object at 0x7ff13c663430>> = <challenge.BiteChallenge object at 0x7ff13c663430>.verify
+
+/tmp/test_challenge.py:46: AssertionError
+=========================== short test summary info ============================
+FAILED ../../tmp/test_challenge.py::test_super_and_abst_method_implementation
+FAILED ../../tmp/test_challenge.py::test_super_and_abst_property_implementation
+========================= 2 failed, 2 passed in 0.10s ==========================
